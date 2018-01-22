@@ -25,7 +25,7 @@ list(APPEND Libs ${LIBVLC_LIBRARY})
 list(APPEND Libs ${LIBVLCCORE_LIBRARY})
 list(APPEND Libs "resolv")
 
-file(GLOB SOURCES src/main/*.cpp src/main/*.h src/main/*.m src/main/*.png)
+file(GLOB SOURCES src/*/*.cpp src/*/*.h src/*/*.m src/*/*.png)
 
 include_directories(include)
 include_directories(src/main)

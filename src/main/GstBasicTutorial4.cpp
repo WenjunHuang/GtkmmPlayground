@@ -22,7 +22,7 @@ TEST_CASE("tutorial_4", "[gst]") {
 
   data.playbin = Gst::PlayBin::create("playbin");
   data.playbin->set_property("uri",
-                             "https://www.freedesktop.org/software/gstreamer-sdk/data/media/sintel_trailer-480p.webm");
+                             Glib::ustring("https://www.freedesktop.org/software/gstreamer-sdk/data/media/sintel_trailer-480p.webm"));
   data.playbin->set_state(Gst::State::STATE_PLAYING);
   auto bus = data.playbin->get_bus();
 

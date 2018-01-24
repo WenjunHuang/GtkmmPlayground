@@ -22,8 +22,8 @@
 .idea/**/libraries
 
 # CMake
-cmake-build-debug/
-cmake-build-release/
+cmake-build-*/
+.idea/
 
 # Mongo Explorer plugin:
 .idea/**/mongoSettings.xml

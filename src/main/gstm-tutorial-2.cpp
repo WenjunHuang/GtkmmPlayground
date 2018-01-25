@@ -37,27 +37,27 @@ TEST_CASE("tutorial_2", "[gstmm]") {
   }
 
   auto bus = pipeline->get_bus();
-  auto msg = bus->pop(Gst::CLOCK_DONE, Gst::MESSAGE_ERROR | Gst::MESSAGE_EOS);
-  if (msg) {
-    switch (msg->get_message_type()) {
-      case Gst::MESSAGE_ERROR: {
-        auto errorMsg = Glib::RefPtr<Gst::MessageError>::cast_static(msg);
-        std::cerr << msg->get_source()->get_name()
-                  << errorMsg->parse_error().what()
-                  << std::endl;
-        FAIL();
-        break;
+
+  while(true) {
+    auto msg = bus->pop(Gst::CLOCK_TIME_NONE, Gst::MESSAGE_ERROR | Gst::MESSAGE_EOS);
+    if (msg) {
+      switch (msg->get_message_type()) {
+        case Gst::MESSAGE_ERROR: {
+          auto errorMsg = Glib::RefPtr<Gst::MessageError>::cast_static(msg);
+          std::cerr << msg->get_source()->get_name()
+                    << errorMsg->parse_error().what()
+                    << std::endl;
+          FAIL();
+          break;
+        }
+        case Gst::MESSAGE_EOS:
+          std::cout << "End-Of-Stream reached" << std::endl;
+              break;
+        default:
+          std::cerr << "Unexpected message received" << std::endl;
+              break;
       }
-      case Gst::MESSAGE_EOS:
-        std::cout << "End-Of-Stream reached" << std::endl;
-        break;
-      default:
-        std::cerr << "Unexpected message received" << std::endl;
-        break;
     }
-  } else {
-    GMainLoop *main_loop = g_main_loop_new(NULL, FALSE);
-    g_main_loop_run(main_loop);
   }
 
   pipeline->set_state(Gst::STATE_NULL);

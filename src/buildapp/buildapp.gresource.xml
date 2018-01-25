@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gresources>
+    <gresource prefix="/org/gtkmm/exampleapp">
+        <file preprocess="xml-stripblanks">window.glade</file>
+        <file preprocess="xml-stripblanks">app_menu.glade</file>
+        <file preprocess="xml-stripblanks">prefs.glade</file>
+        <file preprocess="xml-stripblanks">gears_menu.glade</file>
+    </gresource>
+</gresources>

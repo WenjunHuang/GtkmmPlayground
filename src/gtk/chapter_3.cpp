@@ -9,7 +9,7 @@
 constexpr int NUM_NAMES = 4;
 const gchar *names[] = {"Andrew", "joe", "Samantha", "Jonathan"};
 
-void destroy(GtkWidget *widget, gpointer data) {
+static void destroy(GtkWidget *widget, gpointer data) {
   gtk_main_quit();
 }
 

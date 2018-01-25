@@ -3,14 +3,35 @@
 //
 
 #pragma once
+
 #include <gtkmm.h>
 
 
-class MainWindow :public Gtk::ApplicationWindow {
+class MainWindow : public Gtk::ApplicationWindow {
 public:
-    MainWindow();
+  MainWindow(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &refBuilder);
 
-    void open_file_view(const Glib::RefPtr<Gio::File> &file);
+  static MainWindow *create();
+
+  void open_file_view(const Glib::RefPtr<Gio::File> &file);
+
+protected:
+  void update_words();
+  void on_search_text_changed();
+  void on_visible_child_changed();
+  void on_reveal_child_changed();
+  void on_find_word(const Gtk::Button* button);
+
+  Glib::RefPtr<Gtk::Builder> _refBuilder;
+  Gtk::Stack *_stack;
+  Glib::RefPtr<Gio::Settings> _settings;
+  Gtk::ToggleButton *_search;
+  Gtk::SearchBar *_searchbar;
+  Gtk::SearchEntry *_searchentry;
+  Gtk::MenuButton *_gears;
+  Gtk::Revealer *_sidebar;
+  Gtk::ListBox *_words;
+  Glib::RefPtr<Glib::Binding> _prop_binding;
 
 };
 

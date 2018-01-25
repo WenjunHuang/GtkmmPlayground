@@ -80,17 +80,64 @@ TEST_CASE("fixed", "[gtk]") {
                            "clicked",
                            G_CALLBACK(gtk_widget_destroy),
                            (gpointer) window);
-  g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(destroy),nullptr);
+  g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy), nullptr);
 
-  gtk_fixed_put(GTK_FIXED(fixed),button1,0,0);
-  gtk_fixed_put(GTK_FIXED(fixed),button2,20,30);
+  gtk_fixed_put(GTK_FIXED(fixed), button1, 0, 0);
+  gtk_fixed_put(GTK_FIXED(fixed), button2, 20, 30);
 
-  gtk_container_add(GTK_CONTAINER(window),fixed);
+  gtk_container_add(GTK_CONTAINER(window), fixed);
   gtk_widget_show_all(window);
 
   gtk_main();
 }
 
-TEST_CASE("expander","[gtk]"){
-  gtk_init(nullptr,nullptr);
+TEST_CASE("expander", "[gtk]") {
+  gtk_init(nullptr, nullptr);
+
+  auto window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Expander");
+  gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+  gtk_widget_set_size_request(window, 200, 100);
+
+  auto expander = gtk_expander_new_with_mnemonic("Click __Me for More!");
+  auto label = gtk_label_new("Hide me or show me,\nthat is your choice.");
+  gtk_container_add(GTK_CONTAINER(expander), label);
+  gtk_expander_set_expanded(GTK_EXPANDER(expander), true);
+  gtk_container_add(GTK_CONTAINER(window), expander);
+
+  gtk_widget_show_all(window);
+  gtk_main();
+}
+
+TEST_CASE("handleboxes", "[gtk]") {
+  gtk_init(nullptr, nullptr);
+
+  auto window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Handle Box");
+  gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+  gtk_widget_set_size_request(window, 200, 100);
+
+}
+
+gboolean pulse_progress(GtkProgressBar *progress) {
+  static gint count = 0;
+  gtk_progress_bar_pulse(progress);
+  count++;
+  return count < 100;
+}
+
+TEST_CASE("timeouts", "[gtk]") {
+  gtk_init(nullptr, nullptr);
+  auto window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Timeouts");
+  gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+  gtk_widget_set_size_request(window, 200, -1);
+
+  auto progress = gtk_progress_bar_new();
+  gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(progress), 0.1);
+
+  g_timeout_add(100,(GSourceFunc)pulse_progress,(gpointer)progress);
+  gtk_container_add(GTK_CONTAINER(window),progress);
+  gtk_widget_show_all(window);
+  gtk_main();
 }

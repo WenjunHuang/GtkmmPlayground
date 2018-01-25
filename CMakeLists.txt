@@ -18,11 +18,6 @@ pkg_check_modules(GSTREAMERMM REQUIRED gstreamermm-1.0)
 include_directories(${GSTREAMERMM_INCLUDE_DIRS})
 list(APPEND Libs ${GSTREAMERMM_LIBRARIES})
 
-# vlc 库
-find_package(LIBVLC REQUIRED)
-include_directories(${LIBVLC_INCLUDE_DIR})
-list(APPEND Libs ${LIBVLC_LIBRARY})
-list(APPEND Libs ${LIBVLCCORE_LIBRARY})
 list(APPEND Libs "resolv")
 
 file(GLOB SOURCES src/*/*.cpp src/*/*.h src/*/*.m src/*/*.png)
@@ -31,10 +26,5 @@ include_directories(include)
 include_directories(src/main)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-add_custom_command(TARGET ${PROJECT_NAME}
-        POST_BUILD
-        COMMAND ${CMAKE_SOURCE_DIR}/cmake/FixBundle.sh ${LIBVLC_LIBRARY} ${LIBVLCCORE_LIBRARY} ${CMAKE_BINARY_DIR} ${PROJECT_NAME}
-        COMMENT "Fixing application bundle for local run"
-        )
 
 target_link_libraries(${PROJECT_NAME} ${Libs})

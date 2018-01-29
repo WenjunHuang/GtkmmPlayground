@@ -2,6 +2,7 @@
 // Created by xxzyjy on 2018/1/25.
 //
 
+#include <iostream>
 #include "AppPrefs.h"
 
 AppPrefs::AppPrefs(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &refBuilder) :
@@ -20,6 +21,8 @@ AppPrefs *AppPrefs::create(Gtk::Window &parent) {
   auto refBuilder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/prefs.glade");
   AppPrefs *dialog = nullptr;
   refBuilder->get_widget_derived("prefs_dialog",dialog);
+  std::cout << "Is Dialog Model?"<<dialog->get_modal() << std::endl;
+  dialog->set_modal(true);
   dialog->set_transient_for(parent);
   return dialog;
 }

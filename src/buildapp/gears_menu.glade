@@ -6,6 +6,10 @@
                 <attribute name="label">_Words</attribute>
                 <attribute name="action">win.show-words</attribute>
             </item>
+            <item>
+                <attribute name="label">_Lines</attribute>
+                <attribute name="action">win.show-lines</attribute>
+            </item>
         </section>
     </menu>
 </interface>

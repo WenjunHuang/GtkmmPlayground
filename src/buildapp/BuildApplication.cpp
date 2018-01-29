@@ -39,6 +39,7 @@ void BuildApplication::on_open(const Gio::Application::type_vec_files &files, co
   if (windows.size() > 0)
     appwindow = dynamic_cast<MainWindow *>(windows[0]);
 
+
   try {
     if (!appwindow)
       appwindow = create_appwindow();
@@ -59,6 +60,7 @@ void BuildApplication::on_hide_window(Gtk::Window *window) {
 void BuildApplication::on_startup() {
   Gtk::Application::on_startup();
 
+  GActionEntry entry;
   add_action("preferences", sigc::mem_fun(*this, &BuildApplication::on_action_preferences));
   add_action("quit", sigc::mem_fun(*this, &BuildApplication::on_action_quit));
   set_accel_for_action("app.quit", "<Ctrl>Q");

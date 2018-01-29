@@ -17,6 +17,7 @@ public:
 
 protected:
   void update_words();
+  void update_lines();
   void on_search_text_changed();
   void on_visible_child_changed();
   void on_reveal_child_changed();
@@ -31,7 +32,11 @@ protected:
   Gtk::MenuButton *_gears;
   Gtk::Revealer *_sidebar;
   Gtk::ListBox *_words;
-  Glib::RefPtr<Glib::Binding> _prop_binding;
+  Gtk::Label * _lines;
+  Gtk::Label *_lines_label;
+
+  Glib::RefPtr<Glib::Binding> _binding_search_enabled;
+  Glib::RefPtr<Glib::Binding> _binding_lines_visible;
 
 };
 

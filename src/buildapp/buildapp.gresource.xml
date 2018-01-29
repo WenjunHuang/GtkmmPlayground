@@ -5,5 +5,6 @@
         <file preprocess="xml-stripblanks">app_menu.glade</file>
         <file preprocess="xml-stripblanks">prefs.glade</file>
         <file preprocess="xml-stripblanks">gears_menu.glade</file>
+        <file>exampleapp.png</file>
     </gresource>
 </gresources>

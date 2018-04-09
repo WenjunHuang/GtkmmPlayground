@@ -13,7 +13,7 @@ Gtk3WidgetFactoryApplication::Gtk3WidgetFactoryApplication() : Gtk::Application(
 
 void Gtk3WidgetFactoryApplication::setupOptions() {
   add_main_option_entry(OPTION_TYPE_BOOL, "version", '\0', "Show program version");
-//  signal_handle_local_options().connect(sigc::mem_fun(*this, &onLocalOptions));
+  signal_handle_local_options().connect(sigc::mem_fun(*this, &Gtk3WidgetFactoryApplication::onLocalOptions));
 }
 
 void Gtk3WidgetFactoryApplication::addActionEntries() {
@@ -59,7 +59,7 @@ void Gtk3WidgetFactoryApplication::on_activate() {
     cssProvider,
     GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-  auto builder = Gtk::Builder::create_from_resource("/org/gtk/WidgetFactory/widget-factory.ui");
+  auto builder = Gtk::Builder::create_from_resource("/org/gtkmm/WidgetFactory/widget-factory.ui");
 
 
 

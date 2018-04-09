@@ -4,6 +4,8 @@
 
 #include "MainWindow.h"
 #include <glibmm/propertyproxy.h>
+#include <iostream>
+#include <set>
 
 MainWindow::MainWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &refBuilder) : Gtk::ApplicationWindow{cobject},

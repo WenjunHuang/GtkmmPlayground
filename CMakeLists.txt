@@ -4,7 +4,6 @@ project(GtkmmPlayground)
 set(CMAKE_CXX_STANDARD 14)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(GlibCompileResourcesSupport)
-include(cotire)
 
 find_package(Boost REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
@@ -23,7 +22,7 @@ list(APPEND Libs ${GSTREAMERMM_LIBRARIES})
 include_directories(${GSTREAMERMM_INCLUDE_DIRS})
 
 
-file(GLOB SOURCES src/*/*.cpp src/*/*.h src/*/*.m src/*/*.png src/*/*.c)
+file(GLOB SOURCES src/*/*.cpp src/*/*/*.cpp src/*/*.h src/*/*/*.h src/*/*.m src/*/*.png src/*/*.c)
 #file(GLOB UI src/*/*.glade)
 
 include_directories(include)
@@ -41,4 +40,3 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 #add_dependencies(${PROJECT_NAME} resource)
 
 target_link_libraries(${PROJECT_NAME} ${Libs})
-cotire(${PROJECT_NAME})

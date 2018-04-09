@@ -3,6 +3,7 @@
 //
 
 #include "catch.hpp"
+#include <gtkmm.h>
 
 void buildUi(const Glib::RefPtr<Gtk::Application> &app) {
   auto mainWindow = new Gtk::ApplicationWindow(app);

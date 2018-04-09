@@ -3,6 +3,8 @@
 //
 
 #include <cairomm/cairomm.h>
+#include <giomm.h>
+#include <iostream>
 #include "catch.hpp"
 
 TEST_CASE("cairo_png", "[gtkmm]") {
